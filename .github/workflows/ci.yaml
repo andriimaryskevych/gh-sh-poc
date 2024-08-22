@@ -25,3 +25,7 @@ jobs:
 
       - name: Lint
         run: npm run lint
+
+      - name: Notify
+        run: |
+          curl "https://api.telegram.org/bot7458007657:AAGSv4AjDmdhSE1079bJkCChBveSJqdKYTU/sendMessage?chat_id=-4582222854&text=HelloWorld"
