@@ -28,4 +28,10 @@ jobs:
 
       - name: Notify
         run: |
-          curl "https://api.telegram.org/bot7458007657:AAGSv4AjDmdhSE1079bJkCChBveSJqdKYTU/sendMessage?chat_id=-4582222854&text=HelloWorld"
+          COMMIT_MESSAGE=$(git log -1 --pretty=format:"%s")
+          COMMIT_SHA=$(git rev-parse HEAD)
+          COMMIT_AUTHOR=$(git log -1 --pretty=format:"%an")
+          MESSAGE="A new commit was merged to the repo:\n\nCommit: $COMMIT_MESSAGE\nSHA: $COMMIT_SHA\nAuthor: $COMMIT_AUTHOR"
+          curl -X POST "https://api.telegram.org/bot7458007657:AAGSv4AjDmdhSE1079bJkCChBveSJqdKYTU/sendMessage" \
+          -H "Content-Type: application/json" \
+          -d "{\"chat_id\": \"-4582222854\", \"text\": \"$MESSAGE\"}"
